@@ -16,6 +16,8 @@ export default function Contact() {
   const phone = contactData.phone || '+91 98604 89490';
   const email = contactData.email || 'namotradelink@gmail.com';
   const address = contactData.address || 'Office No. 801, Apex Business Court,\nNear Gangadham, Pune 411037';
+  const mapLink = contactData.mapLink || '';
+  const linkedinUrl = contactData.linkedinUrl || '';
   const businessType = contactData.businessType || 'Iron & Steel Merchants';
   const waPhone = phone.replace(/\D/g, '');
 
@@ -101,6 +103,26 @@ export default function Contact() {
                 <span style={{ whiteSpace: 'pre-line' }}>{address}</span>
               </div>
             </div>
+            {mapLink && (
+              <div style={{ marginTop: 16, borderRadius: 12, overflow: 'hidden', position: 'relative', border: '1.5px solid #dde4ee' }}>
+                <iframe
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed&z=16`}
+                  width="100%"
+                  height="220"
+                  style={{ display: 'block', border: 'none', pointerEvents: 'none' }}
+                  loading="lazy"
+                  title="Office Location"
+                />
+                <a
+                  href={mapLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', padding: 10, textDecoration: 'none' }}
+                >
+                  <span style={{ background: 'var(--orange)', color: '#fff', fontSize: 12, fontWeight: 700, padding: '5px 12px', borderRadius: 6, boxShadow: '0 2px 8px rgba(0,0,0,0.18)' }}>Open in Google Maps ↗</span>
+                </a>
+              </div>
+            )}
             <div className="contact-item">
               <div className="contact-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
@@ -113,6 +135,17 @@ export default function Contact() {
                 <span>{businessType}</span>
               </div>
             </div>
+            {linkedinUrl && (
+              <div className="contact-item" style={{ marginTop: 12 }}>
+                <div className="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </div>
+                <div>
+                  <span className="contact-label">LinkedIn</span>
+                  <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--orange)', textDecoration: 'none', fontWeight: 600 }}>Namo Steel on LinkedIn</a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

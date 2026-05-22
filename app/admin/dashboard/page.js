@@ -1696,7 +1696,20 @@ function EditWebsiteTab({ draft, updateDraft, publish, saved }) {
                 <div>
                   <span className="contact-label">Office</span>
                   <EF value={draft.contact.address} onChange={up('contact.address')} multiline rows={2} fontSize={13} fontWeight={500} color="var(--navy)" style={{ lineHeight: 1.5, whiteSpace: 'pre-line' }} />
+                  {draft.contact.mapLink
+                    ? <a href={draft.contact.mapLink} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#e87722', textDecoration: 'none', display: 'inline-block', marginTop: 4 }}>📍 View on Google Maps</a>
+                    : null}
                 </div>
+              </div>
+              <div style={{ marginTop: 12, padding: '10px 14px', background: '#0d1726', borderRadius: 10, border: '1px solid #1e2d42' }}>
+                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#64748b', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Google Maps Link</label>
+                <input
+                  type="url"
+                  value={draft.contact.mapLink || ''}
+                  onChange={e => up('contact.mapLink')(e.target.value)}
+                  placeholder="https://maps.google.com/..."
+                  style={{ width: '100%', padding: '8px 10px', border: '1.5px solid #1e2d42', borderRadius: 8, fontSize: 13, background: '#0e1a2b', color: '#e2e8f0', outline: 'none', boxSizing: 'border-box', fontFamily: 'inherit' }}
+                />
               </div>
             </div>
           </div>

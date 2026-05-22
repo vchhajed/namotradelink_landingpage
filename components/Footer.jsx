@@ -13,6 +13,8 @@ export default function Footer() {
   const phone = footer.presentedPhone || contact.phone || '+91 98604 89490';
   const email = footer.presentedEmail || contact.email || 'namotradelink@gmail.com';
   const address = contact.address || 'Office No. 801, Apex Business Court,\nNear Gangadham, Pune 411037';
+  const mapLink = contact.mapLink || '';
+  const linkedinUrl = contact.linkedinUrl || '';
   const presentedBy = footer.presentedBy || '';
   const copyright = footer.copyright || '© 2025 Namo Steel. All rights reserved. | Iron & Steel Merchants Since 1995';
   const waPhone = phone.replace(/\D/g, '');
@@ -65,6 +67,8 @@ export default function Footer() {
           <p><a href={`https://wa.me/${waPhone}`} target="_blank" rel="noopener noreferrer">{phone}</a></p>
           <p><a href={`mailto:${email}`}>{email}</a></p>
           <p style={{ whiteSpace: 'pre-line' }}>{address}</p>
+          {mapLink && <p><a href={mapLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600 }}>View on Google Maps</a></p>}
+          {linkedinUrl && <p><a href={linkedinUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--orange)', textDecoration: 'none', fontWeight: 600 }}>in LinkedIn</a></p>}
           {presentedBy && <p className="footer-person">Presented by: <strong>{presentedBy}</strong></p>}
         </div>
       </div>
