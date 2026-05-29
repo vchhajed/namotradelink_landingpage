@@ -6,7 +6,8 @@
       { "href": "#products", "label": "Products" },
       { "href": "#brands", "label": "Brands" },
       { "href": "#cases", "label": "Case Studies" },
-      { "href": "#clients", "label": "Clients" }
+      { "href": "#clients", "label": "Clients" },
+      { "href": "/specifications", "label": "Specifications" }
     ],
     "ctaLabel": "Contact Us"
   },
