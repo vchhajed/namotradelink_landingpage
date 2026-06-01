@@ -207,7 +207,7 @@ export default function SpecificationsPage() {
                 ['300x200','','','180','225','270','360','128','518'],
                 ['400x200','','','216','270','324','432','513','621'],
               ].map(([dim,...vals],i)=>(
-                <tr key={dim} style={{ background: i%2===0?'#fff':'#f8fafc' }}>
+                <tr key={i} style={{ background: i%2===0?'#fff':'#f8fafc' }}>
                   <td style={tdDim}>{dim}</td>
                   {vals.map((v,j)=><td key={j} style={td}>{v||'–'}</td>)}
                 </tr>

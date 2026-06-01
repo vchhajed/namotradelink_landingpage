@@ -1916,11 +1916,11 @@ function LeadsPendingTab({ pendingLeads, setPendingLeads }) {
                     <span style={{ background: (statusColor[l.review_status]||'#64748b')+'22', color: statusColor[l.review_status]||'#64748b', border: `1px solid ${(statusColor[l.review_status]||'#64748b')}44`, borderRadius: 99, padding: '2px 10px', fontSize: 11, fontWeight: 600, textTransform: 'capitalize', whiteSpace: 'nowrap' }}>{l.review_status}</span>
                   </td>
                   <td style={{ padding: '10px 14px', whiteSpace: 'nowrap' }} onClick={e => e.stopPropagation()}>
-                    {l.review_status === 'pending' ? (
+                    {l.review_status !== 'approved' && l.review_status !== 'duplicate' ? (
                       <>
                         <button onClick={() => act(l.id,'approve')} disabled={acting===l.id} style={{ background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 12, color: '#22c55e', marginRight: 4, fontWeight: 600 }}>✓</button>
-                        <button onClick={() => act(l.id,'reject')}  disabled={acting===l.id} style={{ background: 'rgba(248,113,113,0.1)', border: 'none', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 12, color: '#f87171', marginRight: 4 }}>✕</button>
-                        <button onClick={() => act(l.id,'duplicate')} disabled={acting===l.id} style={{ background: '#1e2d42', border: 'none', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 12, color: '#64748b' }}>Dup</button>
+                        {l.review_status !== 'rejected' && <button onClick={() => act(l.id,'reject')} disabled={acting===l.id} style={{ background: 'rgba(248,113,113,0.1)', border: 'none', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 12, color: '#f87171', marginRight: 4 }}>✕</button>}
+                        {l.review_status !== 'rejected' && <button onClick={() => act(l.id,'duplicate')} disabled={acting===l.id} style={{ background: '#1e2d42', border: 'none', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 12, color: '#64748b' }}>Dup</button>}
                       </>
                     ) : <span style={{ fontSize: 12, color: '#334155' }}>—</span>}
                   </td>
@@ -1944,16 +1944,18 @@ function LeadsPendingTab({ pendingLeads, setPendingLeads }) {
               ))}
             </div>
             {detail.notes && <div style={{ marginBottom: 16 }}><div style={{ fontSize: 10, fontWeight: 700, color: '#4a5a6b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>Notes</div><div style={{ fontSize: 13, color: '#94a3b8', background: '#0d1726', borderRadius: 8, padding: '8px 12px' }}>{detail.notes}</div></div>}
-            {detail.review_status === 'pending' && (
+            {(detail.review_status === 'pending' || detail.review_status === 'rejected') && (
               <>
                 <div style={{ marginBottom: 12 }}>
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#64748b', marginBottom: 5, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Review Notes (optional)</label>
                   <textarea value={reviewNotes} onChange={e => setReviewNotes(e.target.value)} placeholder="Add a note…" rows={2} style={{ width: '100%', padding: '9px 12px', border: '1.5px solid #1e2d42', borderRadius: 9, fontSize: 14, fontFamily: 'inherit', boxSizing: 'border-box', outline: 'none', color: '#e2e8f0', background: '#0e1a2b', resize: 'vertical' }} />
                 </div>
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button onClick={() => act(detail.id,'approve')}   style={{ flex: 1, background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', color: '#22c55e', borderRadius: 8, padding: '10px 0', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>✓ Approve</button>
-                  <button onClick={() => act(detail.id,'reject')}    style={{ flex: 1, background: 'rgba(248,113,113,0.1)', border: '1px solid rgba(248,113,113,0.2)', color: '#f87171', borderRadius: 8, padding: '10px 0', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>✕ Reject</button>
-                  <button onClick={() => act(detail.id,'duplicate')} style={{ background: '#1e2d42', border: 'none', color: '#64748b', borderRadius: 8, padding: '10px 14px', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}>Dup</button>
+                  <button onClick={() => act(detail.id,'approve')} style={{ flex: 1, background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.3)', color: '#22c55e', borderRadius: 8, padding: '10px 0', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>✓ Approve</button>
+                  {detail.review_status === 'pending' && <>
+                    <button onClick={() => act(detail.id,'reject')}    style={{ flex: 1, background: 'rgba(248,113,113,0.1)', border: '1px solid rgba(248,113,113,0.2)', color: '#f87171', borderRadius: 8, padding: '10px 0', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>✕ Reject</button>
+                    <button onClick={() => act(detail.id,'duplicate')} style={{ background: '#1e2d42', border: 'none', color: '#64748b', borderRadius: 8, padding: '10px 14px', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}>Dup</button>
+                  </>}
                 </div>
               </>
             )}
