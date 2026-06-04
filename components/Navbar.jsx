@@ -8,7 +8,10 @@ export default function Navbar() {
   const content = useSiteContent();
   const navbar = content?.navbar || {};
   const branding = content?.branding || {};
-  const links = navbar.navLinks || [];
+  const baseLinks = navbar.navLinks || [];
+  const links = baseLinks.some(l => l.href === '/specifications')
+    ? baseLinks
+    : [...baseLinks, { href: '/specifications', label: 'Specifications' }];
   const ctaLabel = navbar.ctaLabel || 'Contact Us';
   const logoText = branding.logoText || 'NAMO STEEL';
   const logoTagline = navbar.logoTagline || 'The Steel Hub';
