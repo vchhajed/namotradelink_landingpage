@@ -21,8 +21,8 @@ function SubTitle({ children }) {
 
 function TableWrap({ children }) {
   return (
-    <div style={{ overflowX: 'auto', marginBottom: 32, borderRadius: 10, boxShadow: '0 2px 12px rgba(0,0,0,0.07)', border: '1px solid #dde4ee' }}>
-      <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 480 }}>
+    <div style={{ marginBottom: 32, borderRadius: 10, boxShadow: '0 2px 12px rgba(0,0,0,0.07)', border: '1px solid #dde4ee' }}>
+      <table style={{ borderCollapse: 'collapse', width: '100%', tableLayout: 'fixed' }}>
         {children}
       </table>
     </div>
